@@ -86,10 +86,33 @@ var app = {
     
     testFunc: function() {
         
-        ESApi.searchRestaurants({ 'street-address': '316 W. Washington Ave. Madison, WI' }, function(response) {
-        var address = response.address;
-        var restaurants = response.restaurants;
-        console.log(address, restaurants);
+        var apiKeys = new Array();
+        
+        ESApi.searchRestaurants({ 'street-address': '5241 N Maple Ave. Fresno, CA' }, function(response) {
+            var address = response.address;
+            var restaurants = response.restaurants;
+            console.log(restaurants);
+            
+            for (i = 0; i < restaurants.length; i++) {
+            
+                apiKeys.push(restaurants[i].apiKey);
+            
+            }
+            
+        });
+        
+        console.log(apiKeys);
+        
+        app.testGetMenu(apiKeys);
+        
+    },
+    
+    testGetMenu: function(keys) {
+        
+        alert("testGetMenu called");
+        
+        ESApi.getRestaurantMenu({ apiKey: '90fd4587554469b1f15b4f2e73e761809f4b4bcca52eedca' }, function(menuCategories) {
+        console.log(menuCategories);
         });
         
     },
